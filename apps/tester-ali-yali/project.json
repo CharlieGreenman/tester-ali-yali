@@ -1,0 +1,88 @@
+{
+  "name": "tester-ali-yali",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/tester-ali-yali/src",
+  "prefix": "tester-ali-yali",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/tester-ali-yali",
+        "index": "apps/tester-ali-yali/src/index.html",
+        "main": "apps/tester-ali-yali/src/main.ts",
+        "polyfills": "apps/tester-ali-yali/src/polyfills.ts",
+        "tsConfig": "apps/tester-ali-yali/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/tester-ali-yali/src/favicon.ico",
+          "apps/tester-ali-yali/src/assets"
+        ],
+        "styles": ["apps/tester-ali-yali/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/tester-ali-yali/src/environments/environment.ts",
+              "with": "apps/tester-ali-yali/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "tester-ali-yali:build:production"
+        },
+        "development": {
+          "buildTarget": "tester-ali-yali:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "tester-ali-yali:build"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/tester-ali-yali"],
+      "options": {
+        "jestConfig": "apps/tester-ali-yali/jest.config.ts"
+      }
+    }
+  },
+  "tags": []
+}
